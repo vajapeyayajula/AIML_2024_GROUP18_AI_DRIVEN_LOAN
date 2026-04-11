@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Loan Predictor | Precision Credit Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">
+                    <span>AI</span>
+                </div>
+                <h1>LoanOracle</h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-item active">
+                    <span class="icon">📈</span>
+                    <span>Application</span>
+                </div>
+                <div class="nav-item">
+                    <span class="icon">📜</span>
+                    <span>History</span>
+                </div>
+                <div class="nav-item">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-stats">
+                <div class="stat-card">
+                    <label>Internal Model</label>
+                    <p>Logistic Regression</p>
+                </div>
+                <div class="stat-card">
+                    <label>Accuracy</label>
+                    <p>89.4% Verified</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div>
+                    <h2>New Credit Analysis</h2>
+                    <p>Fill in all 22 attributes for a comprehensive risk assessment.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                </div>
+            </header>
+
+            <form id="loanForm" class="loan-form">
+                <!-- Group 1: Demographic -->
+                <section class="form-section">
+                    <h3 class="section-title">Personal & Demographic</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="Age">Age</label>
+                            <input type="number" id="Age" name="Age" placeholder="e.g., 35" required min="18">
+                        </div>
+                        <div class="input-group">
+                            <label for="Gender">Gender</label>
+                            <select id="Gender" name="Gender" required>
+                                <option value="" disabled selected>Select...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="Marital_Status">Marital Status</label>
+                            <select id="Marital_Status" name="Marital_Status" required>
+                                <option value="" disabled selected>Select...</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="Education_Level">Education Details</label>
+                            <select id="Education_Level" name="Education_Level" required>
+                                <option value="" disabled selected>Select...</option>
+                                <option value="High School">High School</option>
+                                <option value="Bachelor">Bachelor</option>
+                                <option value="Master">Master</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="Dependents">Dependents</label>
+                            <input type="number" id="Dependents" name="Dependents" value="0" min="0">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Group 2: Employment -->
+                <section class="form-section">
+                    <h3 class="section-title">Employment & Career</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="Employment_Type">Employment Type</label>
+                            <select id="Employment_Type" name="Employment_Type" required>
+                                <option value="" disabled selected>Select...</option>
+                                <option value="Salaried">Salaried</option>
+                                <option value="Self-Employed">Self-Employed</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="Years_at_Current_Job">Years at Current Job</label>
+                            <input type="number" id="Years_at_Current_Job" name="Years_at_Current_Job" value="2" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="Employer_Category">Employer Category</label>
+                            <select id="Employer_Category" name="Employer_Category">
+                                <option value="Private">Private Sector</option>
+                                <option value="Public">Public Sector</option>
+                                <option value="Government">Government</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Group 3: Financials -->
+                <section class="form-section">
+                    <h3 class="section-title">Financial Profile</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="Annual_Income">Annual Income ($)</label>
+                            <input type="number" id="Annual_Income" name="Annual_Income" placeholder="e.g., 60000" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="Total_Assets">Total Assets ($)</label>
+                            <input type="number" id="Total_Assets" name="Total_Assets" placeholder="e.g., 100000">
+                        </div>
+                        <div class="input-group">
+                            <label for="Monthly_Expenses">Monthly Expenses ($)</label>
+                            <input type="number" id="Monthly_Expenses" name="Monthly_Expenses" placeholder="e.g., 1500" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="Savings_Balance">Savings Balance ($)</label>
+                            <input type="number" id="Savings_Balance" name="Savings_Balance" value="0">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Group 4: Credit & Debt -->
+                <section class="form-section">
+                    <h3 class="section-title">Credit & Risk Metrics</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="FICO_Score">FICO Score</label>
+                            <input type="number" id="FICO_Score" name="FICO_Score" placeholder="300-850" required min="300" max="850">
+                        </div>
+                        <div class="input-group">
+                            <label for="Debt_to_Income_Ratio">Debt-to-Income Ratio</label>
+                            <input type="number" id="Debt_to_Income_Ratio" name="Debt_to_Income_Ratio" step="0.01" value="0.3">
+                        </div>
+                        <div class="input-group">
+                            <label for="Credit_Utilization">Credit Utilization (%)</label>
+                            <input type="number" id="Credit_Utilization" name="Credit_Utilization" step="0.01" value="30">
+                        </div>
+                        <div class="input-group">
+                            <label for="Existing_Credits_Count">Existing Credits</label>
+                            <input type="number" id="Existing_Credits_Count" name="Existing_Credits_Count" value="1" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="Prev_Defaults">Previous Defaults</label>
+                            <input type="number" id="Prev_Defaults" name="Prev_Defaults" value="0" min="0">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Group 5: Loan -->
+                <section class="form-section">
+                    <h3 class="section-title">Proposed Loan Details</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="Loan_Amount">Requested Amount ($)</label>
+                            <input type="number" id="Loan_Amount" name="Loan_Amount" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="Loan_Purpose">Loan Purpose</label>
+                            <select id="Loan_Purpose" name="Loan_Purpose" required>
+                                <option value="Home">Home Improvement</option>
+                                <option value="Education">Education</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="Term_Months">Term (Months)</label>
+                            <input type="number" id="Term_Months" name="Term_Months" value="36" min="6">
+                        </div>
+                        <div class="input-group">
+                            <label for="Interest_Rate">Requested Interest Rate (%)</label>
+                            <input type="number" id="Interest_Rate" name="Interest_Rate" step="0.1" value="5.0">
+                        </div>
+                        <div class="input-group">
+                            <label for="Loan_to_Income_Ratio">Loan-to-Income Ratio</label>
+                            <input type="number" id="Loan_to_Income_Ratio" name="Loan_to_Income_Ratio" step="0.01" value="0.2">
+                        </div>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Run ML Prediction</span>
+                        <div class="loader-ring"></div>
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <!-- Result Modal Overlay -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <div class="result-status-visual">
+                    <div id="statusIcon" class="status-icon"></div>
+                </div>
+                <h2 id="resultTitle">Analyzing Data...</h2>
+                <p id="resultMessage">Please wait while our artificial intelligence evaluates your profile.</p>
+                <div class="result-breakdown" id="resultBreakdown">
+                    <!-- Dynamic details here -->
+                </div>
+                <button class="close-btn" onclick="closeModal()">Back to Form</button>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
