@@ -1,12 +1,12 @@
 # Stage 1: Build stage
 FROM public.ecr.aws/lambda/python:3.12 as builder
 
-# Install build tools for any packages that might still need compilation
-RUN yum update -y && \
-    yum install -y gcc gcc-c++ python3-devel atlas-devel blas-devel lapack-devel make cmake && \
-    yum clean all
+# AL2023 uses dnf/microdnf instead of yum
+RUN dnf update -y && \
+    dnf install -y gcc gcc-c++ python3-devel make cmake && \
+    dnf clean all
 
-# Upgrade pip
+# Upgrade build tools
 RUN pip install --upgrade pip setuptools wheel
 
 # Install requirements to a separate directory
@@ -18,7 +18,6 @@ RUN pip install --target /install -r requirements.txt
 FROM public.ecr.aws/lambda/python:3.12
 
 # Copy the installed packages from the builder stage
-# Placing them directly in LAMBDA_TASK_ROOT makes them available to the app
 COPY --from=builder /install ${LAMBDA_TASK_ROOT}
 
 # Copy the application code
