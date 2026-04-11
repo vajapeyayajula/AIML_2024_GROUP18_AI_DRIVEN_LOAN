@@ -17,7 +17,6 @@ This project is now configured for **Full Automation** using GitHub Actions. You
 | :--- | :--- |
 | `AWS_ACCESS_KEY_ID` | Your AWS Access Key |
 | `AWS_SECRET_ACCESS_KEY` | Your AWS Secret Access Key |
-| `ECR_REPOSITORY` | (Optional/Auto-created) You can leave this for now or provide an ECR URI if you have one. |
 
 ## Step 2: Deploy
 
