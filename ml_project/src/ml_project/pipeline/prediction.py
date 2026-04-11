@@ -41,6 +41,13 @@ class PredictionPipeline:
         
         # Derive subset features as per original logic
         df_derived = dervieSubsetFeatures(df.copy())
+
+        # Normalize Credit_Utilization if it looks like a percentage (0-100)
+        # The model was trained on decimal values (0.0-1.0)
+        if 'Credit_Utilization' in df_derived.columns:
+            # If values are consistently > 1, they are likely percentages
+            if df_derived['Credit_Utilization'].max() > 1.0:
+                df_derived['Credit_Utilization'] = df_derived['Credit_Utilization'] / 100.0
         
         # Fill any columns the pipeline expects but weren't provided,
         # using training-set defaults so the encoder never sees unknown values.
@@ -60,7 +67,7 @@ class PredictionPipeline:
         for i, pred in enumerate(predictions):
             results.append({
                 "application_index": i,
-                "prediction": "Approved" if pred == 1 else "Rejected"
+                "prediction": "Approved" if pred == 0 else "Rejected"
             })
             
         return results
