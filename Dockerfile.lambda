@@ -1,32 +1,27 @@
-FROM public.ecr.aws/lambda/python:3.11
+# Stage 1: Build stage
+FROM public.ecr.aws/lambda/python:3.12 as builder
 
-# Install exhaustive build dependencies for scientific mapping
+# Install build tools for any packages that might still need compilation
 RUN yum update -y && \
-    yum install -y \
-    gcc \
-    gcc-c++ \
-    gcc-gfortran \
-    python3-devel \
-    atlas-devel \
-    blas-devel \
-    lapack-devel \
-    make \
-    cmake \
-    && yum clean all
+    yum install -y gcc gcc-c++ python3-devel atlas-devel blas-devel lapack-devel make cmake && \
+    yum clean all
 
-# Upgrade build tools
-RUN pip install --upgrade pip setuptools wheel Cython
+# Upgrade pip
+RUN pip install --upgrade pip setuptools wheel
 
-# Copy requirements.txt
-COPY requirements.txt ${LAMBDA_TASK_ROOT}
+# Install requirements to a separate directory
+COPY requirements.txt .
+RUN pip install --target /install -r requirements.txt
 
-# Install scikit-learn dependencies first to avoid metadata generation errors
-RUN pip install numpy pandas
 
-# Install the remaining packages
-RUN pip install -r requirements.txt
+# Stage 2: Final stage
+FROM public.ecr.aws/lambda/python:3.12
 
-# Copy the rest of the application code
+# Copy the installed packages from the builder stage
+# Placing them directly in LAMBDA_TASK_ROOT makes them available to the app
+COPY --from=builder /install ${LAMBDA_TASK_ROOT}
+
+# Copy the application code
 COPY . ${LAMBDA_TASK_ROOT}
 
 # Set the CMD to your handler
