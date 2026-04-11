@@ -1,5 +1,13 @@
 FROM public.ecr.aws/lambda/python:3.11
 
+# Install build dependencies for libraries like numpy and scikit-learn
+RUN yum update -y && \
+    yum install -y gcc gcc-c++ python3-devel && \
+    yum clean all
+
+# Upgrade pip to ensure the best compatibility with wheels
+RUN pip install --upgrade pip
+
 # Copy requirements.txt
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
