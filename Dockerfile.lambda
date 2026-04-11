@@ -1,17 +1,29 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-# Install build dependencies for libraries like numpy and scikit-learn
+# Install exhaustive build dependencies for scientific mapping
 RUN yum update -y && \
-    yum install -y gcc gcc-c++ python3-devel && \
-    yum clean all
+    yum install -y \
+    gcc \
+    gcc-c++ \
+    gcc-gfortran \
+    python3-devel \
+    atlas-devel \
+    blas-devel \
+    lapack-devel \
+    make \
+    cmake \
+    && yum clean all
 
-# Upgrade pip to ensure the best compatibility with wheels
-RUN pip install --upgrade pip
+# Upgrade build tools
+RUN pip install --upgrade pip setuptools wheel Cython
 
 # Copy requirements.txt
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
-# Install the specified packages
+# Install scikit-learn dependencies first to avoid metadata generation errors
+RUN pip install numpy pandas
+
+# Install the remaining packages
 RUN pip install -r requirements.txt
 
 # Copy the rest of the application code
