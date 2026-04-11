@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from mangum import Mangum
 from src.app.api import loan_processing
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,3 +23,4 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
+handler = Mangum(app)

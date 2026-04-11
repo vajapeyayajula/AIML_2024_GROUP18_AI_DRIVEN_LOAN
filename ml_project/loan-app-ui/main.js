@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:8002/process_loan_applications';
+// Update this URL after deployment with your AWS API Gateway endpoint
+const DEPLOYED_URL = ''; 
+const API_URL = DEPLOYED_URL ? `${DEPLOYED_URL}/process_loan_applications` : 'http://localhost:8002/process_loan_applications';
 
 const loanForm = document.getElementById('loanForm');
 const submitBtn = document.getElementById('submitBtn');
