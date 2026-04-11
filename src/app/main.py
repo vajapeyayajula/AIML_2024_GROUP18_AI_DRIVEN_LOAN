@@ -20,6 +20,16 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(loan_processing.router)
+
+    @app.get("/")
+    async def root():
+        return {
+            "message": "ML Project FastAPI is running!",
+            "endpoints": {
+                "predict": "/process_loan_applications",
+                "health": "/ping"
+            }
+        }
     return app
 
 app = create_app()
