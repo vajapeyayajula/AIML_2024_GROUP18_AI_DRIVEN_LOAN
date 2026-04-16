@@ -35,7 +35,16 @@ jobs:
         id: outputs
         run: |
           BACKEND_URL=$(aws cloudformation describe-stacks --stack-name loan-prediction-stack --query "Stacks[0].Outputs[?OutputKey=='BackendApiUrl'].OutputValue" --output text)
-          BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name loan-prediction-stack --query "Stacks[0].Outputs[?OutputKey=='LoanApplicationUiBucket'].OutputValue" --output text || aws cloudformation describe-stack-resource --stack-name loan-prediction-stack --logical-resource-id LoanApplicationUiBucket --query "StackResourceDetail.PhysicalResourceId" --output text)
+          BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name loan-prediction-stack --query "Stacks[0].Outputs[?OutputKey=='LoanApplicationUiBucket'].OutputValue" --output text)
+          FRONTEND_URL=$(aws cloudformation describe-stacks --stack-name loan-prediction-stack --query "Stacks[0].Outputs[?OutputKey=='FrontendWebsiteUrl'].OutputValue" --output text)
+          
+          echo "--------------------------------------------------"
+          echo "DEPLOYMENT SUCCESSFUL!"
+          echo "Backend API URL: $BACKEND_URL"
+          echo "Frontend S3 Bucket: $BUCKET_NAME"
+          echo "Frontend Website URL: $FRONTEND_URL"
+          echo "--------------------------------------------------"
+          
           echo "backend_url=$BACKEND_URL" >> $GITHUB_OUTPUT
           echo "bucket_name=$BUCKET_NAME" >> $GITHUB_OUTPUT
 
