@@ -1,6 +1,6 @@
-// Update this URL after deployment with your AWS API Gateway endpoint
-const DEPLOYED_URL = ''; 
-const API_URL = DEPLOYED_URL ? `${DEPLOYED_URL}/process_loan_applications` : 'http://localhost:8002/process_loan_applications';
+// AWS API Gateway endpoint
+const DEPLOYED_URL = 'https://ih938ywix9.execute-api.us-east-1.amazonaws.com';
+const API_URL = `${DEPLOYED_URL}/process_loan_applications`;
 
 const loanForm = document.getElementById('loanForm');
 const submitBtn = document.getElementById('submitBtn');
@@ -83,7 +83,7 @@ function displayResult(prediction) {
         `;
     } else {
         resultTitle.textContent = 'System Error';
-        resultMessage.textContent = 'Unable to connect to the prediction engine. Please ensure the FastAPI server is running on port 8002.';
+        resultMessage.textContent = 'Unable to connect to the AWS prediction engine. Please check your network connection or try again later.';
         statusIcon.className = 'status-icon rejected';
     }
 }

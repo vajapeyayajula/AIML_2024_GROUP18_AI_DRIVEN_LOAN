@@ -50,6 +50,6 @@ jobs:
 
       - name: Sync UI to S3
         run: |
-          # Inject the backend URL into main.js
-          sed -i "s|const DEPLOYED_URL = '';|const DEPLOYED_URL = '${{ steps.outputs.outputs.backend_url }}';|g" ./loan-app-ui/main.js
+          # The AWS API Gateway URL is already set in loan-app-ui/main.js.
+          # Sync static files directly to S3.
           aws s3 sync ./loan-app-ui s3://${{ steps.outputs.outputs.bucket_name }} --delete
