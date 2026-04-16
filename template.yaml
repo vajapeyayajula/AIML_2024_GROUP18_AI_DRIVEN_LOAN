@@ -51,6 +51,10 @@ Outputs:
     Description: "API Gateway endpoint URL"
     Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
 
+  LoanApplicationUiBucket:
+    Description: "Name of the S3 bucket for the frontend"
+    Value: !Ref LoanApplicationUiBucket
+
   FrontendWebsiteUrl:
     Description: "URL for the hosted frontend"
     Value: !GetAtt LoanApplicationUiBucket.WebsiteURL
